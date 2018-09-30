@@ -1,0 +1,39 @@
+{
+    "name": "sommerlekene",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@babel/polyfill": "^7.0.0",
+        "connected-react-router": "^4.5.0",
+        "morgan": "^1.9.1",
+        "react-redux": "^5.0.7",
+        "react-router-dom": "^4.3.1",
+        "react-scripts": "1.1.5",
+        "redux": "^4.0.0",
+        "redux-thunk": "^2.3.0"
+    },
+    "scripts": {
+        "compile": "babel server --out-dir build",
+        "watch": "babel server --out-dir build --watch",
+        "nodemon": "nodemon --watch build build/server",
+        "dev": "webpack-dev-server --mode development | npm run watch | npm run nodemon",
+        "build": "NODE_ENV=production npm run compile && webpack --config webpack.prod.config.js",
+        "postinstall": "npm run build",
+        "start": "NODE_ENV=production node build/server"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.1.2",
+        "@babel/core": "^7.1.2",
+        "@babel/preset-env": "^7.1.0",
+        "@babel/preset-react": "^7.0.0",
+        "babel-loader": "^8.0.4",
+        "html-loader": "^0.5.5",
+        "html-webpack-plugin": "^3.2.0",
+        "nodemon": "^1.18.4",
+        "react": "^16.5.2",
+        "react-dom": "^16.5.2",
+        "webpack": "^4.20.2",
+        "webpack-cli": "^3.1.2",
+        "webpack-dev-server": "^3.1.9"
+    }
+}
