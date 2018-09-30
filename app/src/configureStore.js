@@ -10,7 +10,6 @@ const initialState = {};
 const enhancers = [];
 const middleware = [thunk, routerMiddleware(history)];
 
-console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === "development") {
     const devToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__;
 

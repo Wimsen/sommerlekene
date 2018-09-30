@@ -1,7 +1,11 @@
+import "@babel/polyfill";
 import express from "express";
 import bodyParser from "body-parser";
 import morgan from "morgan";
 import path from "path";
+import { dbFindOne } from "./db/db";
+
+import userRouter from "./routes/user";
 
 let port = process.env.NODE_ENV === "production" ? 8080 : 8079;
 const app = express();
@@ -13,13 +17,7 @@ app.use(express.static("dist"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get("/api/test", (req, res) => {
-    res.status(200).send(
-        JSON.stringify({
-            data: [1, 2, 3]
-        })
-    );
-});
+app.use("/api/users", userRouter);
 
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../dist/index.html"));

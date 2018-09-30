@@ -1,11 +1,8 @@
 import { combineReducers } from "redux";
-
-import testReducer from "./test";
-import apireducer from "./api";
+import usersReducer from "./users";
 
 const rootReducer = combineReducers({
-    test: testReducer,
-    api: apireducer
+    users: usersReducer
 });
 
 export default rootReducer;
