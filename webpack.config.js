@@ -1,10 +1,10 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 module.exports = {
+    mode: "development",
     entry: {
         app: ["@babel/polyfill", "./app/src/index.js"],
         styles: ["./app/static/styles/styles.less"]
     },
-
     output: {
         path: __dirname + "/dist",
         filename: "[name].js"
@@ -38,5 +38,8 @@ module.exports = {
         proxy: {
             "/api": "http://localhost:8079"
         }
+    },
+    performance: {
+        hints: false
     }
 };
