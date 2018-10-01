@@ -15,3 +15,14 @@ userRouter.get("/", async (req, res) => {
         res.status(500).send(JSON.stringify(generalError));
     }
 });
+
+userRouter.post("/", async (req, res) => {
+    try {
+        const user = req.body;
+        const status = await createUser(user);
+        res.status(200).send(JSON.stringify({ status: "success" }));
+    } catch (e) {
+        console.log(e);
+        res.status(500).send(JSON.stringify(generalError));
+    }
+});

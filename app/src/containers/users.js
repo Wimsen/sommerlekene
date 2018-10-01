@@ -1,30 +1,50 @@
 import React, { Component } from "react";
-import { push } from "connected-react-router";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
+import Button from "@material-ui/core/Button";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Grid from "@material-ui/core/Grid";
+
 import * as userActions from "../actions/users";
-import User from "../components/user";
+import UserList from "../components/userList";
 
 class Users extends Component {
     componentWillMount() {
         this.props.getAllUsers();
     }
 
+    createUser = async () => {
+        await this.props.createUser();
+        await this.props.getAllUsers();
+    };
+
     render() {
         return (
             <div>
-                {this.props.users &&
-                    this.props.users.map(user => (
-                        <User key={user.id} {...user} />
-                    ))}
+                {this.props.allUserLoading ? <CircularProgress /> : <UserList users={this.props.users} />}
+                {this.props.createUserLoading ? (
+                    <CircularProgress />
+                ) : (
+                    <Grid container>
+                        <Button variant="contained" color="primary" onClick={this.createUser}>
+                            Create new user
+                        </Button>
+                    </Grid>
+                )}
             </div>
         );
     }
 }
 
+Users.defaultProps = {
+    users: [],
+    allUserLoading: false,
+    createUserLoading: false
+};
+
 const mapStateToProps = state => ({
-    users: state.users
+    ...state.users
 });
 
 const mapDispatchToProps = {
