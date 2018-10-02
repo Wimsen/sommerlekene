@@ -1,8 +1,9 @@
 import React from "react";
+import Typography from "@material-ui/core/Typography";
 
 export default () => (
     <div>
-        <h1>About Us</h1>
-        <p>Hello Medium!</p>
+        <Typography variant="display2">Sommerlekene!</Typography>
+        <Typography>Hello</Typography>
     </div>
 );

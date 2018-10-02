@@ -22,16 +22,24 @@ class Users extends Component {
     render() {
         return (
             <div>
-                {this.props.allUserLoading ? <CircularProgress /> : <UserList users={this.props.users} />}
-                {this.props.createUserLoading ? (
-                    <CircularProgress />
-                ) : (
-                    <Grid container>
-                        <Button variant="contained" color="primary" onClick={this.createUser}>
-                            Create new user
-                        </Button>
+                {this.props.allUserLoading ? (
+                    <Grid container justify="center">
+                        <CircularProgress />
                     </Grid>
+                ) : (
+                    <UserList users={this.props.users} />
                 )}
+                <Grid container direction="row" justify="center" alignItems="center">
+                    <Grid item>
+                        {this.props.createUserLoading ? (
+                            <CircularProgress />
+                        ) : (
+                            <Button variant="contained" color="primary" onClick={this.createUser}>
+                                Create new user
+                            </Button>
+                        )}
+                    </Grid>
+                </Grid>
             </div>
         );
     }

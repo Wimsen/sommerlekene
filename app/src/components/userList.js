@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
-import Grid from "@material-ui/core/Grid";
+import List from "@material-ui/core/List";
 
 import User from "./user";
 
-const UserList = props => <div>{props.users.map(user => <User key={user.id} {...user} />)}</div>;
+const UserList = props => <List>{props.users.map(user => <User key={user.id} {...user} />)}</List>;
 
 export default UserList;
