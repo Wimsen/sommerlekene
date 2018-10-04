@@ -1,13 +1,12 @@
 import React, { Component } from "react";
-import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
 import Button from "@material-ui/core/Button";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import Grid from "@material-ui/core/Grid";
 
 import * as userActions from "../actions/users";
 import UserList from "../components/userList";
+import Loading from "../components/loading";
 
 class Users extends Component {
     componentWillMount() {
@@ -22,22 +21,16 @@ class Users extends Component {
     render() {
         return (
             <div>
-                {this.props.allUserLoading ? (
-                    <Grid container justify="center">
-                        <CircularProgress />
-                    </Grid>
-                ) : (
+                <Loading loading={this.props.allUserLoading}>
                     <UserList users={this.props.users} />
-                )}
+                </Loading>
                 <Grid container direction="row" justify="center" alignItems="center">
                     <Grid item>
-                        {this.props.createUserLoading ? (
-                            <CircularProgress />
-                        ) : (
+                        <Loading loading={this.props.createUserLoading}>
                             <Button variant="contained" color="primary" onClick={this.createUser}>
                                 Create new user
                             </Button>
-                        )}
+                        </Loading>
                     </Grid>
                 </Grid>
             </div>

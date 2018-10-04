@@ -16,8 +16,6 @@ import ListItem from "@material-ui/core/ListItem";
 class ButtonAppBar extends Component {
     constructor(props) {
         super(props);
-        console.log(props);
-
         this.state = {
             drawerOpen: false
         };
@@ -41,10 +39,13 @@ class ButtonAppBar extends Component {
                         <div>
                             <List component="nav">
                                 <ListItem button onClick={this.changeRoute("/")}>
-                                    <ListItemText primary="Home" />
+                                    <ListItemText primary="Hjem" />
                                 </ListItem>
                                 <ListItem button onClick={this.changeRoute("/users")}>
-                                    <ListItemText primary="Users" />
+                                    <ListItemText primary="Spillere" />
+                                </ListItem>
+                                <ListItem button onClick={this.changeRoute("/games")}>
+                                    <ListItemText primary="Leker" />
                                 </ListItem>
                             </List>
                         </div>
