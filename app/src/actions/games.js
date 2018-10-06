@@ -1,5 +1,17 @@
 import { asyncCall } from "./api";
 
+export const getGame = id => async dispatch => {
+    dispatch({ type: "FETCH_GAME_STARTED" });
+
+    try {
+        let response = await asyncCall(`/api/games/${id}`);
+        dispatch({ type: "FETCH_GAME_SUCCEEDED", game: response.game, matches: response.matches });
+    } catch (e) {
+        console.log(e);
+        dispatch({ type: "API_ERROR", errormessage: "Noe gikk galt" });
+    }
+};
+
 export const getAllGames = () => async dispatch => {
     dispatch({ type: "ALL_GAMES_FETCH_STARTED" });
     try {

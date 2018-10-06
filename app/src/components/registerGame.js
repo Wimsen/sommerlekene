@@ -48,7 +48,7 @@ class RegisterGame extends Component {
                 <Grid container direction="row" justify="center" alignItems="center">
                     <Grid item>
                         <Button variant="contained" color="primary" onClick={this.toggleModal}>
-                            Registrer ny lek
+                            Registrer ny gren
                         </Button>
                     </Grid>
                 </Grid>

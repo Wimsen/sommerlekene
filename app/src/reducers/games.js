@@ -4,6 +4,20 @@ let initialState = {
 
 const gamesReducer = (state = initialState, action) => {
     switch (action.type) {
+        case "FETCH_GAME_STARTED":
+            return {
+                ...state,
+                getGameLoading: true
+            };
+
+        case "FETCH_GAME_SUCCEEDED":
+            return {
+                ...state,
+                getGameLoading: false,
+                game: action.game,
+                matches: action.matches
+            };
+
         case "ALL_GAMES_FETCH_STARTED":
             return {
                 ...state,

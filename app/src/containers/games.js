@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import * as gamesActions from "../actions/games";
+import Typography from "@material-ui/core/Typography";
 
+import * as gamesActions from "../actions/games";
 import Loading from "../components/loading";
 import GameList from "../components/gameList";
 import RegisterGame from "../components/registerGame";
@@ -26,6 +27,7 @@ class Games extends Component {
     render() {
         return (
             <div>
+                <Typography variant="headline">Grener</Typography>
                 <Loading loading={this.props.allGamesLoading}>
                     <GameList games={this.props.games} />
                 </Loading>

@@ -7,6 +7,7 @@ import { dbFindOne } from "./db/db";
 
 import userRouter from "./routes/user";
 import gameRouter from "./routes/game";
+// import matchRouter from "./routes/match";
 
 let port = process.env.NODE_ENV === "production" ? 8080 : 8079;
 const app = express();
@@ -20,6 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/api/users", userRouter);
 app.use("/api/games", gameRouter);
+// app.use("/api/matches", matchRouter);
 
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../dist/index.html"));
