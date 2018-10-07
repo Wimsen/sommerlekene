@@ -47,11 +47,6 @@ class MatchDetail extends Component {
         });
     };
 
-    registerWinner = winner => async e => {
-        await this.props.registerWinner(winner);
-        this.onClose();
-    };
-
     render() {
         const { classes } = this.props;
         return (
@@ -108,7 +103,7 @@ class MatchDetail extends Component {
                                         type="submit"
                                         variant="contained"
                                         color="primary"
-                                        onClick={this.registerWinner(this.props.team1_id)}
+                                        onClick={() => this.props.registerWinner(this.props.team1_id)}
                                     >
                                         {this.props.team1_name}
                                     </Button>
@@ -116,7 +111,7 @@ class MatchDetail extends Component {
                                         type="submit"
                                         variant="contained"
                                         color="primary"
-                                        onClick={this.registerWinner(this.props.team2_id)}
+                                        onClick={() => this.props.registerWinner(this.props.team2_id)}
                                     >
                                         {this.props.team2_name}
                                     </Button>

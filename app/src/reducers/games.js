@@ -18,6 +18,19 @@ const gamesReducer = (state = initialState, action) => {
                 matches: action.matches
             };
 
+        case "FETCH_STANDINGS_STARTED":
+            return {
+                ...state,
+                getStandingsLoading: true
+            };
+
+        case "FETCH_STANDINGS_SUCCEEDED":
+            return {
+                ...state,
+                getStandingsLoading: false,
+                standings: action.standings
+            };
+
         case "ALL_GAMES_FETCH_STARTED":
             return {
                 ...state,
@@ -46,7 +59,10 @@ const gamesReducer = (state = initialState, action) => {
         case "API_ERROR":
             return {
                 ...state,
-                createGameLoading: false
+                createGameLoading: false,
+                getStandingsLoading: false,
+                getGameLoading: false,
+                allGamesLoading: false
             };
 
         default:

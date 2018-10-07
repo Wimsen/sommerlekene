@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { push } from "react-router-redux";
 
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
@@ -21,8 +22,7 @@ class Game extends Component {
     registerWinner = async winnerId => {
         const { game_id, id } = this.props.selectedMatch;
         await this.props.registerWinner(game_id, id, winnerId);
-        const { gameId, matchId } = this.props.match.params;
-        await this.props.getMatchByGameAndId(gameId, matchId);
+        this.props.push(`/games/${game_id}`);
     };
 
     render() {
@@ -47,7 +47,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-    ...matchesActions
+    ...matchesActions,
+    push: push
 };
 
 export default connect(

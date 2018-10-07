@@ -5,9 +5,9 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 
 import * as gamesActions from "../actions/games";
-import * as matchesActions from "../actions/matches";
 
 import MatchList from "../components/matchList";
+import Standings from "../components/standings";
 import Loading from "../components/loading";
 
 class Game extends Component {
@@ -15,16 +15,22 @@ class Game extends Component {
         super(props);
     }
 
+    loading = () => {
+        return this.props.getGameLoading || this.props.getStandingsLoading;
+    };
+
     async componentWillMount() {
-        await this.props.getGame(this.props.match.params.id);
+        const gameId = this.props.match.params.id;
+        await Promise.all([this.props.getGame(gameId), this.props.getStandings(gameId)]);
     }
 
     render() {
         return (
-            <Loading loading={this.props.getGameLoading}>
+            <Loading loading={this.loading()}>
                 <Grid container justify="center">
                     <Typography variant="headline">{this.props.game.title}</Typography>
                 </Grid>
+                <Standings standings={this.props.standings} />
                 <MatchList type={this.props.game.type} matches={this.props.matches} />
             </Loading>
         );

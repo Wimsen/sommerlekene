@@ -34,3 +34,15 @@ export const createGame = form => async dispatch => {
         dispatch({ type: "API_ERROR", errormessage: "Noe gikk galt" });
     }
 };
+
+export const getStandings = id => async dispatch => {
+    dispatch({ type: "FETCH_STANDINGS_STARTED" });
+
+    try {
+        let standings = await asyncCall(`/api/games/${id}/standings`);
+        dispatch({ type: "FETCH_STANDINGS_SUCCEEDED", standings: standings });
+    } catch (e) {
+        console.log(e);
+        dispatch({ type: "API_ERROR", errormessage: "Noe gikk galt" });
+    }
+};
