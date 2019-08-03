@@ -1,0 +1,25 @@
+{
+  "addons": [
+    "heroku-postgresql",
+    "heroku-postgresql"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/java"
+    }
+  ],
+  "env": {
+    "HEROKU_POSTGRESQL_BLACK_URL": {
+      "required": true
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "name": "sommerlekene",
+  "scripts": {
+  },
+  "stack": "heroku-18"
+}
