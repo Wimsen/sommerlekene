@@ -27,7 +27,7 @@ export const createGame = form => async dispatch => {
     dispatch({ type: "CREATE_GAME_STARTED" });
 
     try {
-        let response = await asyncCall("/api/games", form);
+        await asyncCall("/api/games", form);
         dispatch({ type: "CREATE_GAME_SUCCEEDED" });
     } catch (e) {
         console.log(e);

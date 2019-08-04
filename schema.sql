@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS user_game_point;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS seriesmatches;
 DROP TABLE IF EXISTS playoffmatches;
+DROP TABLE IF EXISTS matches;
 DROP TABLE IF EXISTS teams;
 DROP TABLE IF EXISTS games;
 
@@ -36,20 +37,7 @@ CREATE TABLE IF NOT EXISTS user_game_point (
     FOREIGN KEY(user_id) REFERENCES users(id)
 );
 
-CREATE TABLE IF NOT EXISTS seriesmatches (
-    id serial PRIMARY KEY,
-    created timestamp without time zone DEFAULT now(),
-    game_id integer,
-    team1_id integer NOT NULL,
-    team2_id integer NOT NULL,
-    winner_id integer,
-    FOREIGN KEY(game_id) REFERENCES games(id),
-    FOREIGN KEY(team1_id) REFERENCES teams(id),
-    FOREIGN KEY(team2_id) REFERENCES teams(id),
-    FOREIGN KEY(winner_id) REFERENCES teams(id)
-);
-
-CREATE TABLE IF NOT EXISTS playoffmatches (
+CREATE TABLE IF NOT EXISTS matches (
     id serial PRIMARY KEY,
     created timestamp without time zone DEFAULT now(),
     game_id integer,

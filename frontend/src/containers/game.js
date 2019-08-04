@@ -11,9 +11,6 @@ import Standings from "../components/standings";
 import Loading from "../components/loading";
 
 class Game extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     loading = () => {
         return this.props.getGameLoading || this.props.getStandingsLoading;

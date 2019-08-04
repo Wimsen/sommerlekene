@@ -6,21 +6,16 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
 
 const styles = theme => ({
     root: {
         width: "100%",
-        marginTop: theme.spacing.unit * 3,
+        marginTop: theme.spacing(3),
         overflowX: "auto"
     }
 });
 
 class Standings extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         const { classes } = this.props;
 
