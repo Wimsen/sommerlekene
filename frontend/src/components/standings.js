@@ -40,7 +40,7 @@ class Standings extends Component {
                         return (
                             <TableRow key={row.id}>
                                 <TableCell component="th" scope="row">
-                                    {row.name}
+                                    {row.team.name}
                                 </TableCell>
                                 <TableCell>{row.played}</TableCell>
                                 <TableCell>{row.points}</TableCell>

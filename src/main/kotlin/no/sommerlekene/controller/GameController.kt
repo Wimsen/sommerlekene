@@ -1,5 +1,7 @@
 package no.sommerlekene.controller
 
+import no.sommerlekene.controller.dto.GameDetailDTO
+import no.sommerlekene.controller.dto.GameDetailRowDTO
 import no.sommerlekene.repository.dao.GameDAO
 import no.sommerlekene.service.GameService
 import no.sommerlekene.service.MatchService
@@ -29,13 +31,26 @@ class GameController(
     }
 
     @GetMapping("/{id}")
-    fun getGame(@PathVariable id: Long): ResponseEntity<GameDAO> {
-        val game = gameService.getGameById(id)
-        return if (game.isPresent) {
-            println(game.get().matches)
-            ResponseEntity.ok(game.get())
-        } else {
-            ResponseEntity.notFound().build()
+    fun getGame(@PathVariable id: Long): ResponseEntity<GameDetailDTO> {
+        val optionalGame = gameService.getGameById(id)
+
+        optionalGame?.let { game ->
+            val matches = matchService.getMatchesByGame(game)
+            val upcomingMatches = matches.filter { match -> match.winner == null }
+            val playedMatches = matches.filter { match -> match.winner != null }
+
+            val teams = teamService.getAllTeams()
+            val standings: MutableList<GameDetailRowDTO> = ArrayList()
+
+            for (team in teams) {
+                val matchesPlayed = playedMatches.count { matchDAO -> matchDAO.homeTeam == team || matchDAO.awayTeam == team }
+                val matchesWon = playedMatches.count { matchDAO -> matchDAO.winner == team }
+                standings.add(GameDetailRowDTO(team, matchesPlayed, matchesWon))
+            }
+
+            return ResponseEntity.ok(GameDetailDTO(game, upcomingMatches, playedMatches, standings))
         }
+
+        return ResponseEntity.notFound().build()
     }
 }

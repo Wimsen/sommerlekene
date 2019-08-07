@@ -1,12 +1,8 @@
 package no.sommerlekene.repository.dao
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo
-import com.fasterxml.jackson.annotation.JsonManagedReference
-import com.fasterxml.jackson.annotation.ObjectIdGenerators
 import java.time.LocalDateTime
 import javax.persistence.*
 
-@JsonIdentityInfo(property = "id", generator = ObjectIdGenerators.PropertyGenerator::class)
 @Entity
 @Table(name = "matches")
 class MatchDAO(

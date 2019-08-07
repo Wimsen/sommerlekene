@@ -3,6 +3,7 @@ package no.sommerlekene.configuration
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.filter.CommonsRequestLoggingFilter
+import java.util.*
 
 @Configuration
 class SommerlekenConfiguration {
@@ -17,3 +18,5 @@ class SommerlekenConfiguration {
         return filter
     }
 }
+
+fun <T : Any> Optional<T>.toNullable(): T? = this.orElse(null)

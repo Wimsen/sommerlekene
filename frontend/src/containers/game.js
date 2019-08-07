@@ -12,23 +12,19 @@ import Loading from "../components/loading";
 
 class Game extends Component {
 
-    loading = () => {
-        return this.props.getGameLoading || this.props.getStandingsLoading;
-    };
-
     async componentWillMount() {
         const gameId = this.props.match.params.id;
-        await Promise.all([this.props.getGame(gameId), this.props.getStandings(gameId)]);
+        await this.props.getGame(gameId);
     }
 
     render() {
         return (
-            <Loading loading={this.loading()}>
+            <Loading loading={this.props.getGameLoading}>
                 <Grid container justify="center">
                     <Typography variant="headline">{this.props.game.title}</Typography>
                 </Grid>
                 <Standings standings={this.props.standings} />
-                <MatchList type={this.props.game.type} matches={this.props.matches} />
+                <MatchList game={this.props.game} upcomingMatches={this.props.upcomingMatches} playedMatches={this.props.playedMatches} />
             </Loading>
         );
     }
@@ -36,11 +32,13 @@ class Game extends Component {
 
 Game.defaultProps = {
     game: {},
-    matches: []
+    upcomingMatches: [],
+    playedMatches: [],
+    standings: []
 };
 
 const mapStateToProps = state => ({
-    ...state.games
+    ...state.games.gameDetail
 });
 
 const mapDispatchToProps = {

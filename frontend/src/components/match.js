@@ -10,18 +10,20 @@ const style = {
 };
 
 const Match = props => {
+    const isHomeWinner = props.winner && props.winner.id === props.homeTeam.id;
+    const isAwayWinner = props.winner && props.winner.id === props.awayTeam.id;
     return (
         <Link to={`/games/${props.game_id}/matches/${props.id}`} style={{ textDecoration: "none" }}>
             <ListItem divider>
                 <Grid container justify="center" alignItems="center">
                     <Grid style={style} item xs={6}>
                         <Typography variant="body1">
-                            {props.winner_id === props.team1_id ? <strong>{props.team1_name}</strong> : props.team1_name}
+                            {isHomeWinner ? <strong>{props.homeTeam.name}</strong> : props.homeTeam.name}
                         </Typography>
                     </Grid>
                     <Grid style={style} item xs={6}>
                         <Typography variant="body1">
-                            {props.winner_id === props.team2_id ? <strong>{props.team2_name}</strong> : props.team2_name}
+                            {isAwayWinner ? <strong>{props.awayTeam.name}</strong> : props.awayTeam.name}
                         </Typography>
                     </Grid>
                 </Grid>

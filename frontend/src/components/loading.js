@@ -8,9 +8,8 @@ const Loading = props => (
             <Grid container justify="center">
                 <CircularProgress />
             </Grid>
-        ) : (
-            props.children
-        )}
+        ) : (props.children)
+        }
     </React.Fragment>
 );
 

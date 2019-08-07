@@ -16,9 +16,9 @@ class MatchService(
         return matchRepository.findAll().toList()
     }
 
-    // fun getByGame(game: GameDAO): List<MatchDAO> {
-    //     return matchRepository.findByGameId(game.id!!)
-    // }
+    fun getMatchesByGame(game: GameDAO): List<MatchDAO> {
+        return matchRepository.getMatchesByGame(game).toList()
+    }
 
     fun createMatchesForSeriesGame(game: GameDAO, teams: MutableList<TeamDAO>) {
         val matches = arrayListOf<MatchDAO>()
