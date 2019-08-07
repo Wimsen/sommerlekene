@@ -1,8 +1,9 @@
 package no.sommerlekene.configuration
 
-import com.zaxxer.hikari.*
-import org.springframework.beans.factory.annotation.Value
-import org.springframework.context.annotation.*
+import com.zaxxer.hikari.HikariConfig
+import com.zaxxer.hikari.HikariDataSource
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
 import java.net.URI
 import javax.sql.DataSource
 
@@ -10,25 +11,16 @@ import javax.sql.DataSource
 class DatabaseConfig {
     @Bean
     fun dataSource(): DataSource {
-        val databaseUrl = System.getenv("DATABASE_URL")
-
-        val dbUri: URI
-        try {
-            dbUri = URI(databaseUrl)
-        } catch (exception: Exception) {
-            throw exception
-        }
-
-        val dbUrl = ("jdbc:postgresql://" + dbUri.host + ':'
-                + dbUri.port + dbUri.path)
+        val dbUri = URI(System.getenv("DATABASE_URL"))
         val username = dbUri.userInfo.split(":")[0]
         val password = dbUri.userInfo.split(":")[1]
-
+        val dbUrl = "jdbc:postgresql://" + dbUri.host + ':'.toString() + dbUri.port + dbUri.path + "?sslmode=require"
 
         val config = HikariConfig()
         config.jdbcUrl = dbUrl
         config.username = username
         config.password = password
+
         return HikariDataSource(config)
     }
 }

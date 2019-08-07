@@ -9,10 +9,6 @@ import GameList from "../components/gameList";
 import RegisterGame from "../components/registerGame";
 
 class Games extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentWillMount() {
         this.props.getAllGames();
     }

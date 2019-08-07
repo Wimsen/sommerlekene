@@ -8,8 +8,8 @@ export const asyncCall = async (
     }
 ) => {
     let method =
-        methodParam == undefined
-            ? body == undefined
+        methodParam === undefined
+            ? body === undefined
                 ? "GET"
                 : "POST"
             : methodParam;

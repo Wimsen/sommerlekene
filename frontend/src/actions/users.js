@@ -29,7 +29,7 @@ export const getUsersByTeam = teamId => async dispatch => {
 export const createUser = () => async dispatch => {
     dispatch({ type: "CREATE_USER_STARTED" });
     try {
-        let response = await asyncCall("/api/users", { username: "TestName" });
+        await asyncCall("/api/users", { username: "TestName" });
         dispatch({ type: "CREATE_USER_SUCCEEDED" });
     } catch (e) {
         console.log(e);

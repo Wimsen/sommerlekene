@@ -14,7 +14,7 @@ export const getMatchByGameAndId = (gameId, matchId) => async dispatch => {
 export const registerWinner = (gameId, matchId, winnerId) => async dispatch => {
     dispatch({ type: "REGISTER_WINNER_STARTED" });
     try {
-        let selectedMatch = await asyncCall(`/api/games/${gameId}/matches/${matchId}`, { winnerId: winnerId });
+        // let selectedMatch = await asyncCall(`/api/games/${gameId}/matches/${matchId}`, { winnerId: winnerId });
         dispatch({ type: "REGISTER_WINNER_SUCCEEDED" });
     } catch (e) {
         console.log(e);

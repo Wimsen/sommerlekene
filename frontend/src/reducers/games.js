@@ -1,4 +1,5 @@
 let initialState = {
+    gameDetail: {},
     games: []
 };
 
@@ -13,22 +14,8 @@ const gamesReducer = (state = initialState, action) => {
         case "FETCH_GAME_SUCCEEDED":
             return {
                 ...state,
+                gameDetail: action.gameDetail,
                 getGameLoading: false,
-                game: action.game,
-                matches: action.matches
-            };
-
-        case "FETCH_STANDINGS_STARTED":
-            return {
-                ...state,
-                getStandingsLoading: true
-            };
-
-        case "FETCH_STANDINGS_SUCCEEDED":
-            return {
-                ...state,
-                getStandingsLoading: false,
-                standings: action.standings
             };
 
         case "ALL_GAMES_FETCH_STARTED":

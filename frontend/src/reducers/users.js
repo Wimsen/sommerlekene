@@ -2,7 +2,7 @@ let initialState = {
     allUserLoading: false,
     createUserLoading: false,
     teamUsersLoading: false,
-    users: {},
+    users: [],
     loadingTeamUsers: 0
 };
 

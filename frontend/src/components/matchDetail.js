@@ -20,10 +20,10 @@ const style = {
 const styles = theme => ({
     paper: {
         position: "absolute",
-        width: theme.spacing.unit * 50,
+        width: theme.spacing(50),
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
-        padding: theme.spacing.unit * 4,
+        padding: theme.spacing(4),
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)"
@@ -65,7 +65,7 @@ class MatchDetail extends Component {
                     <Grid container justify="center" alignItems="center">
                         <Grid style={style} item xs={6}>
                             <Typography variant="headline">
-                                {this.props.winner_id == this.props.team1_id ? (
+                                {this.props.winner_id === this.props.team1_id ? (
                                     <strong>{this.props.team1_name}</strong>
                                 ) : (
                                         this.props.team1_name
@@ -74,7 +74,7 @@ class MatchDetail extends Component {
                         </Grid>
                         <Grid style={style} item xs={6}>
                             <Typography variant="headline">
-                                {this.props.winner_id == this.props.team2_id ? (
+                                {this.props.winner_id === this.props.team2_id ? (
                                     <strong>{this.props.team2_name}</strong>
                                 ) : (
                                         this.props.team2_name
