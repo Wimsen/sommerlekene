@@ -35,7 +35,7 @@ class GameController(
         val optionalGame = gameService.getGameById(id)
 
         optionalGame?.let { game ->
-            val matches = matchService.getMatchesByGame(game)
+            val matches = matchService.getMatchesByGame(game).sortedBy { it.id }
             val upcomingMatches = matches.filter { match -> match.winner == null }
             val playedMatches = matches.filter { match -> match.winner != null }
 
