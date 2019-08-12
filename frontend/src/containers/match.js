@@ -20,8 +20,9 @@ class Game extends Component {
 
     registerWinner = async winnerId => {
         const matchId = this.props.matches.matchDetail.id;
+        const gameId = this.props.matches.matchDetail.game.id;
         await this.props.registerWinner(matchId, winnerId);
-        // this.props.push(`/games/${game_id}`);
+        this.props.push(`/games/${gameId}`);
     };
 
     teamsLoading = () => {
