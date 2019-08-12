@@ -36,16 +36,6 @@ class Game extends Component {
     render() {
         const isLoading = !this.isFinishedLoading();
         return (
-            // <Loading loading={this.props.matches.getMatchLoading}>
-            //     <MatchDetail
-            //         registerLoading={this.props.matches.registerLoading}
-            //         registerWinner={this.registerWinner}
-            //         teamUsersLoading={this.props.users.loadingTeamUsers !== 0}
-            //         homePlayers={this.props.users.users[team1_id]}
-            //         awayPlayers={this.props.users.users[team2_id]}
-            //         {...this.props.matches.selectedMatch}
-            //     />
-            // </Loading>
             <Loading loading={isLoading}>
                 <MatchDetail
                     isFinishedLoading={this.isFinishedLoading}
