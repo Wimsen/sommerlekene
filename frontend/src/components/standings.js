@@ -38,7 +38,7 @@ class Standings extends Component {
                 <TableBody>
                     {rows.map(row => {
                         return (
-                            <TableRow key={row.id}>
+                            <TableRow key={row.team.id}>
                                 <TableCell component="th" scope="row">
                                     {row.team.name}
                                 </TableCell>

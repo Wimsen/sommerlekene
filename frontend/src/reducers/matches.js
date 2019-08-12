@@ -14,7 +14,7 @@ const matchesReducer = (state = initialState, action) => {
             return {
                 ...state,
                 getMatchLoading: false,
-                selectedMatch: action.selectedMatch
+                matchDetail: action.matchDetail
             };
 
         case "REGISTER_WINNER_STARTED":

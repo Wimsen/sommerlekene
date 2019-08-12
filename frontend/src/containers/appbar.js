@@ -56,7 +56,7 @@ class ButtonAppBar extends Component {
                         <IconButton color="inherit" aria-label="Menu" onClick={this.toggleDrawer}>
                             <MenuIcon />
                         </IconButton>
-                        <Typography variant="title" color="inherit" onClick={this.changeRoute("/")}>
+                        <Typography color="inherit" onClick={this.changeRoute("/")}>
                             Sommerlekene
                         </Typography>
                         <Button color="inherit">Login</Button>

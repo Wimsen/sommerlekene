@@ -16,16 +16,27 @@ export const asyncCall = async (
 
     return new Promise(async (resolve, reject) => {
         try {
+            console.log(endpoint, JSON.stringify({
+                method: method,
+                headers: headers,
+                body: JSON.stringify(body)
+            }, null, 2));
+
             let response = await fetch(endpoint, {
                 method: method,
                 headers: headers,
                 body: JSON.stringify(body)
             });
-            let responseJson = await response.json();
+            const contentType = response.headers.get("content-type");
             if (response.ok) {
-                resolve(responseJson);
+                if (contentType && contentType.indexOf("application/json") !== -1) {
+                    let responseJson = await response.json();
+                    resolve(responseJson);
+                } else {
+                    resolve();
+                }
             } else {
-                reject(responseJson);
+                reject();
             }
         } catch (error) {
             reject(error);

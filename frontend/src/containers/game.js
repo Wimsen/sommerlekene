@@ -19,9 +19,9 @@ class Game extends Component {
 
     render() {
         return (
-            <Loading loading={this.props.getGameLoading}>
+            <Loading loading={this.props.loading}>
                 <Grid container justify="center">
-                    <Typography variant="headline">{this.props.game.title}</Typography>
+                    <Typography variant="h4">{this.props.game.title}</Typography>
                 </Grid>
                 <Standings standings={this.props.standings} />
                 <MatchList game={this.props.game} upcomingMatches={this.props.upcomingMatches} playedMatches={this.props.playedMatches} />
@@ -38,6 +38,7 @@ Game.defaultProps = {
 };
 
 const mapStateToProps = state => ({
+    loading: state.games.getGameLoading,
     ...state.games.gameDetail
 });
 
