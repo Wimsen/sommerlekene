@@ -14,7 +14,9 @@ import Match from "./containers/match";
 
 const styles = {
     appContainer: {
-        paddingTop: "50px"
+        paddingTop: "15px",
+        paddingLeft: "8px",
+        paddingRight: "8px"
     }
 }
 
