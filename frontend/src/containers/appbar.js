@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Drawer from "@material-ui/core/Drawer";
@@ -56,10 +55,9 @@ class ButtonAppBar extends Component {
                         <IconButton color="inherit" aria-label="Menu" onClick={this.toggleDrawer}>
                             <MenuIcon />
                         </IconButton>
-                        <Typography variant="title" color="inherit" onClick={this.changeRoute("/")}>
+                        <Typography color="inherit" onClick={this.changeRoute("/")}>
                             Sommerlekene
                         </Typography>
-                        <Button color="inherit">Login</Button>
                     </Toolbar>
                 </AppBar>
             </div>

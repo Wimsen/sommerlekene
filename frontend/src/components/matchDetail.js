@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
+import Link from '@material-ui/core/Link';
+
 
 import { withStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
@@ -52,32 +54,33 @@ class MatchDetail extends Component {
 
     render() {
         const { classes } = this.props;
+        const winnerId = this.props.winner ? this.props.winner.id : undefined;
         return (
             <React.Fragment>
                 <Grid container>
                     <Grid container justify="center" alignItems="center">
-                        <Link to={`/games/${this.props.game_id}`} style={{ textDecoration: "none" }}>
-                            <Grid item>
-                                <Typography variant="display1"> {this.props.game_title}</Typography>
-                            </Grid>
-                        </Link>
+                        <Grid item>
+                            <Link color="inherit" component={RouterLink} to={`/games/${this.props.matchDetail.game.id}`} style={{ textDecoration: "none" }}>
+                                <Typography variant="h4"> {this.props.matchDetail.game.title}</Typography>
+                            </Link>
+                        </Grid>
                     </Grid>
                     <Grid container justify="center" alignItems="center">
                         <Grid style={style} item xs={6}>
-                            <Typography variant="headline">
-                                {this.props.winner_id === this.props.team1_id ? (
-                                    <strong>{this.props.team1_name}</strong>
+                            <Typography>
+                                {winnerId === this.props.homeTeam.team.id ? (
+                                    <strong>{this.props.homeTeam.team.name}</strong>
                                 ) : (
-                                        this.props.team1_name
+                                        this.props.homeTeam.team.name
                                     )}
                             </Typography>
                         </Grid>
                         <Grid style={style} item xs={6}>
-                            <Typography variant="headline">
-                                {this.props.winner_id === this.props.team2_id ? (
-                                    <strong>{this.props.team2_name}</strong>
+                            <Typography >
+                                {winnerId === this.props.awayTeam.team.id ? (
+                                    <strong>{this.props.awayTeam.team.name}</strong>
                                 ) : (
-                                        this.props.team2_name
+                                        this.props.awayTeam.team.name
                                     )}
                             </Typography>
                         </Grid>
@@ -95,29 +98,29 @@ class MatchDetail extends Component {
 
                 <Loading loading={this.props.teamUsersLoading}>
                     <List>
-                        <ListSubheader>{this.props.team1_name}</ListSubheader>
-                        {this.props.homePlayers.map(user => <UserPointRow key={user.id} {...user} />)}
-                        <ListSubheader>{this.props.team2_name}</ListSubheader>
-                        {this.props.awayPlayers.map(user => <UserPointRow key={user.id} {...user} />)}
+                        <ListSubheader>{this.props.homeTeam.team.name}</ListSubheader>
+                        {this.props.homeTeam.members.map(user => <UserPointRow key={user.id} {...user} />)}
+                        <ListSubheader>{this.props.awayTeam.team.name}</ListSubheader>
+                        {this.props.awayTeam.members.map(user => <UserPointRow key={user.id} {...user} />)}
                     </List>
                 </Loading>
 
                 <Modal open={this.state.modalOpen} onClose={this.onClose}>
                     <div className={classes.paper}>
-                        <Grid container justify="center" spacing={40}>
-                            <Typography variant="display1">Registrer vinner</Typography>
+                        <Grid container justify="center">
+                            <Typography>Registrer vinner</Typography>
                         </Grid>
 
                         <Loading loading={this.props.registerLoading}>
-                            <Grid container justify="center" spacing={40}>
+                            <Grid container spacing={3} justify="center">
                                 <Grid item>
                                     <Button
                                         type="submit"
                                         variant="contained"
                                         color="primary"
-                                        onClick={() => this.props.registerWinner(this.props.team1_id)}
+                                        onClick={() => this.props.registerWinner(this.props.homeTeam.team.id)}
                                     >
-                                        {this.props.team1_name}
+                                        {this.props.homeTeam.team.name}
                                     </Button>
                                 </Grid>
                                 <Grid item>
@@ -125,9 +128,9 @@ class MatchDetail extends Component {
                                         type="submit"
                                         variant="contained"
                                         color="primary"
-                                        onClick={() => this.props.registerWinner(this.props.team2_id)}
+                                        onClick={() => this.props.registerWinner(this.props.awayTeam.team.id)}
                                     >
-                                        {this.props.team2_name}
+                                        {this.props.awayTeam.team.name}
                                     </Button>
                                 </Grid>
                             </Grid>
@@ -139,8 +142,5 @@ class MatchDetail extends Component {
     }
 }
 
-MatchDetail.defaultProps = {
-    homePlayers: [],
-    awayPlayers: []
-};
+
 export default withStyles(styles)(MatchDetail);

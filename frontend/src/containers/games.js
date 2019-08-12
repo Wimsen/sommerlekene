@@ -23,7 +23,7 @@ class Games extends Component {
     render() {
         return (
             <div>
-                <Typography variant="headline">Grener</Typography>
+                <Typography variant="h5">Grener</Typography>
                 <Loading loading={this.props.allGamesLoading}>
                     <GameList games={this.props.games} />
                 </Loading>

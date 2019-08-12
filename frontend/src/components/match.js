@@ -1,5 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
+import Link from '@material-ui/core/Link';
+
 
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -13,7 +15,7 @@ const Match = props => {
     const isHomeWinner = props.winner && props.winner.id === props.homeTeam.id;
     const isAwayWinner = props.winner && props.winner.id === props.awayTeam.id;
     return (
-        <Link to={`/games/${props.game_id}/matches/${props.id}`} style={{ textDecoration: "none" }}>
+        <Link component={RouterLink} color="inherit" to={`/matches/${props.id}`} style={{ textDecoration: "none" }}>
             <ListItem divider>
                 <Grid container justify="center" alignItems="center">
                     <Grid style={style} item xs={6}>

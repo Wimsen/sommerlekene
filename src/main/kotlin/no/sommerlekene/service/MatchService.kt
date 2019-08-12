@@ -1,5 +1,6 @@
 package no.sommerlekene.service
 
+import no.sommerlekene.configuration.toNullable
 import no.sommerlekene.repository.MatchRepository
 import no.sommerlekene.repository.dao.GameDAO
 import no.sommerlekene.repository.dao.MatchDAO
@@ -18,6 +19,14 @@ class MatchService(
 
     fun getMatchesByGame(game: GameDAO): List<MatchDAO> {
         return matchRepository.getMatchesByGame(game).toList()
+    }
+
+    fun getMatchById(matchId: Long): MatchDAO? {
+        return matchRepository.findById(matchId).toNullable()
+    }
+
+    fun updateMatch(match: MatchDAO) {
+        matchRepository.save(match)
     }
 
     fun createMatchesForSeriesGame(game: GameDAO, teams: MutableList<TeamDAO>) {
