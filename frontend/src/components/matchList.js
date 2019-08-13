@@ -6,10 +6,8 @@ import Match from "./match";
 const MatchList = props => {
     return (
         <List>
-            <ListSubheader>Kommende kamper</ListSubheader>
-            {props.upcomingMatches.map(match => <Match key={match.id} {...match} />)}
-            <ListSubheader>Spilte kamper</ListSubheader>
-            {props.playedMatches.map(match => <Match key={match.id} {...match} />)}
+            <ListSubheader>{props.header}</ListSubheader>
+            {props.matches.map(match => <Match key={match.id} {...match} />)}
         </List>
     );
 };

@@ -5,7 +5,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "matches")
-class MatchDAO(
+data class MatchDAO(
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Long? = null,
         var created: LocalDateTime = LocalDateTime.now(),
         @ManyToOne @JoinColumn(name = "game_id") var game: GameDAO? = null,

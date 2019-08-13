@@ -29,6 +29,42 @@ class MatchService(
         matchRepository.save(match)
     }
 
+    fun getMatchesByGameAndStage(game: GameDAO, stage: Int): List<MatchDAO> {
+        return matchRepository.getMatchesByGameAndStage(game, stage)
+    }
+
+    fun createNextEndplayStageIfNeeded(game: GameDAO, stage: Int) {
+        // Only do something for stages before finales
+        if (stage > 3) {
+            val matches = getMatchesByGameAndStage(game, stage)
+
+            // Create next stage if all current stage matches are finished
+            if (matches.filter { it.winner == null }.none()) {
+                val firstWinner = matches[0].winner!!
+                val firstLoser = listOf(matches[0].homeTeam, matches[0].awayTeam).find { teamDAO -> teamDAO != matches[0].winner }
+
+                val secondWinner = matches[1].winner!!
+                val secondLoser = listOf(matches[1].homeTeam, matches[1].awayTeam).find { teamDAO -> teamDAO != matches[1].winner }
+
+                val finale = MatchDAO(game = game, homeTeam = firstWinner, awayTeam = secondWinner, stage = stage / 2)
+                val bronzeFinale = MatchDAO(game = game, homeTeam = firstLoser, awayTeam = secondLoser, stage = stage / 2 + 1)
+
+                matchRepository.saveAll(listOf(finale, bronzeFinale))
+            }
+        }
+    }
+
+    fun createMatchesForEndplayGame(game: GameDAO, teams: MutableList<TeamDAO>) {
+        //    TODO now were assuming 4 teams
+
+        teams.shuffle()
+        val firstMatch = MatchDAO(game = game, homeTeam = teams[0], awayTeam = teams[1], stage = 4)
+        val secondMatch = MatchDAO(game = game, homeTeam = teams[2], awayTeam = teams[3], stage = 4)
+
+        matchRepository.saveAll(listOf(firstMatch, secondMatch))
+
+    }
+
     fun createMatchesForSeriesGame(game: GameDAO, teams: MutableList<TeamDAO>) {
         val matches = arrayListOf<MatchDAO>()
 

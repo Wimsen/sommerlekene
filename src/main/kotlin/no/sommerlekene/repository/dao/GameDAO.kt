@@ -5,7 +5,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "games")
-class GameDAO(
+data class GameDAO(
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Long? = null,
         var created: LocalDateTime = LocalDateTime.now(),
         var title: String? = "",

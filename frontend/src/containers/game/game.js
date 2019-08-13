@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
 
-import * as gamesActions from "../actions/games";
+import * as gamesActions from "../../actions/games";
 
-import MatchList from "../components/matchList";
-import Standings from "../components/standings";
-import Loading from "../components/loading";
+import Loading from "../../components/loading";
+import SeriesGame from "./seriesgame";
+import PlayoffGame from "./playoffgame";
+
 
 class Game extends Component {
 
@@ -17,14 +16,17 @@ class Game extends Component {
         await this.props.getGame(gameId);
     }
 
+    getGameDetailComponent = () => {
+        const type = this.props.gameDetail.game ? this.props.gameDetail.game.type : "";
+        if (type === "Serie") return <SeriesGame {...this.props.gameDetail} />;
+        else if (type === "Utslag") return <PlayoffGame {...this.props.gameDetail} />;
+        else return "";
+    }
+
     render() {
         return (
             <Loading loading={this.props.loading}>
-                <Grid container justify="center">
-                    <Typography variant="h4">{this.props.game.title}</Typography>
-                </Grid>
-                <Standings standings={this.props.standings} />
-                <MatchList game={this.props.game} upcomingMatches={this.props.upcomingMatches} playedMatches={this.props.playedMatches} />
+                {this.getGameDetailComponent()}
             </Loading>
         );
     }
@@ -39,7 +41,7 @@ Game.defaultProps = {
 
 const mapStateToProps = state => ({
     loading: state.games.getGameLoading,
-    ...state.games.gameDetail
+    gameDetail: state.games.gameDetail
 });
 
 const mapDispatchToProps = {

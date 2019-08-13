@@ -3,7 +3,6 @@ package no.sommerlekene.controller
 import no.sommerlekene.repository.dao.MatchDAO
 import no.sommerlekene.service.MatchService
 import no.sommerlekene.service.TeamService
-import org.springframework.http.ResponseCookie
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -13,7 +12,6 @@ class MatchController(
         val matchService: MatchService,
         val teamService: TeamService
 ) {
-
     @GetMapping("/{id}")
     fun getMatch(@PathVariable id: Long): ResponseEntity<MatchDAO> {
         val optionalMatch = matchService.getMatchById(id)
@@ -32,9 +30,14 @@ class MatchController(
 
             optionalWinnerTeam?.let { winnerTeam ->
                 if (match.awayTeam == winnerTeam || match.homeTeam == winnerTeam) {
-
                     match.winner = winnerTeam
                     matchService.updateMatch(match)
+
+                    // Update next stage if playoff game
+                    val optionalStage = match.stage
+                    optionalStage?.let { stage ->
+                        matchService.createNextEndplayStageIfNeeded(match.game!!, stage)
+                    }
 
                     return ResponseEntity.ok().build()
                 }

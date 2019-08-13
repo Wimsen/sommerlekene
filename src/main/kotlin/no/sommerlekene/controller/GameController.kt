@@ -26,7 +26,10 @@ class GameController(
     fun createGame(@Valid @RequestBody gameDAO: GameDAO): ResponseEntity<GameDAO> {
         val createdGame = gameService.createGame(gameDAO)
         val allTeams = teamService.getAllTeams()
-        matchService.createMatchesForSeriesGame(createdGame, allTeams.toMutableList())
+        when (createdGame.type) {
+            "Serie" -> matchService.createMatchesForSeriesGame(createdGame, allTeams.toMutableList())
+            "Utslag" -> matchService.createMatchesForEndplayGame(createdGame, allTeams.toMutableList())
+        }
         return ResponseEntity.ok(createdGame)
     }
 

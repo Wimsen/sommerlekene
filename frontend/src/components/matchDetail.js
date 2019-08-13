@@ -15,12 +15,11 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import UserPointRow from "../components/userPointRow";
 import Loading from "./loading";
 
-const style = {
-    textAlign: "center"
-};
-
 const styles = theme => ({
-    paper: {
+    row: {
+        padding: theme.spacing(2)
+    },
+    modal: {
         position: "absolute",
         width: theme.spacing(50),
         backgroundColor: theme.palette.background.paper,
@@ -66,7 +65,7 @@ class MatchDetail extends Component {
                         </Grid>
                     </Grid>
                     <Grid container justify="center" alignItems="center">
-                        <Grid style={style} item xs={6}>
+                        <Grid item xs={6} align="center">
                             <Typography>
                                 {winnerId === this.props.homeTeam.team.id ? (
                                     <strong>{this.props.homeTeam.team.name}</strong>
@@ -75,7 +74,7 @@ class MatchDetail extends Component {
                                     )}
                             </Typography>
                         </Grid>
-                        <Grid style={style} item xs={6}>
+                        <Grid item xs={6} align="center">
                             <Typography >
                                 {winnerId === this.props.awayTeam.team.id ? (
                                     <strong>{this.props.awayTeam.team.name}</strong>
@@ -85,7 +84,7 @@ class MatchDetail extends Component {
                             </Typography>
                         </Grid>
                     </Grid>
-                    <Grid container direction="row" justify="center" alignItems="center">
+                    <Grid container justify="center" alignItems="center">
                         <Grid item>
                             <Loading loading={this.props.createUserLoading}>
                                 <Button variant="contained" color="primary" onClick={this.toggleModal}>
@@ -106,7 +105,7 @@ class MatchDetail extends Component {
                 </Loading>
 
                 <Modal open={this.state.modalOpen} onClose={this.onClose}>
-                    <div className={classes.paper}>
+                    <div className={classes.modal}>
                         <Grid container justify="center">
                             <Typography>Registrer vinner</Typography>
                         </Grid>

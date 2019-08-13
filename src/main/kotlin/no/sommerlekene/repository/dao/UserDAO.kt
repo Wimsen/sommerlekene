@@ -5,7 +5,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "users")
-class UserDAO(
+data class UserDAO(
         @Id @GeneratedValue(strategy= GenerationType.IDENTITY) var id: Long? = null,
         var created: LocalDateTime = LocalDateTime.now(),
         var username: String = "",
