@@ -9,7 +9,7 @@ import ButtonAppBar from "./containers/appbar";
 import About from "./containers/about";
 import Users from "./containers/users";
 import Games from "./containers/games";
-import Game from "./containers/game";
+import Game from "./containers/game/game";
 import Match from "./containers/match";
 
 const styles = {
