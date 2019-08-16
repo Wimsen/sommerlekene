@@ -1,5 +1,6 @@
 package no.sommerlekene.controller
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import no.sommerlekene.controller.dto.GameDetailDTO
 import no.sommerlekene.controller.dto.GameDetailRowDTO
 import no.sommerlekene.repository.dao.GameDAO
@@ -27,9 +28,11 @@ class GameController(
         val createdGame = gameService.createGame(gameDAO)
         val allTeams = teamService.getAllTeams()
         when (createdGame.type) {
-            "Serie" -> matchService.createMatchesForSeriesGame(createdGame, allTeams.toMutableList())
-            "Utslag" -> matchService.createMatchesForEndplayGame(createdGame, allTeams.toMutableList())
+            GameType.SERIES -> matchService.createMatchesForSeriesGame(createdGame, allTeams.toMutableList())
+            GameType.PLAYOFF -> matchService.createMatchesForEndplayGame(createdGame, allTeams.toMutableList())
+            else -> return ResponseEntity.badRequest().build()
         }
+
         return ResponseEntity.ok(createdGame)
     }
 
@@ -56,4 +59,15 @@ class GameController(
 
         return ResponseEntity.notFound().build()
     }
+}
+
+enum class GameType(val type: String) {
+    @JsonProperty("Serie")
+    SERIES("Serie"),
+
+    @JsonProperty("Utslag")
+    PLAYOFF("Utslag"),
+
+    @JsonProperty("")
+    EMPTY("")
 }
