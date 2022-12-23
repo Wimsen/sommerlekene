@@ -1,0 +1,28 @@
+name: Run Hasura migrations
+on:
+  push:
+    paths:
+      - hasura/**
+      - .github/workflows/hasura-migrations.yml
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'yarn'
+
+      - run: yarn install --frozen-lockfile
+
+      - name: Apply Hasura migrations and metadata
+        run: |
+          npx hasura metadata apply --project hasura --endpoint ${{ secrets.HASURA_ENDPOINT }} --admin-secret ${{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}
+          npx hasura migrate apply --project hasura --endpoint ${{ secrets.HASURA_ENDPOINT }} --admin-secret ${{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }} --database-name default
+          npx hasura metadata reload --project hasura --endpoint ${{ secrets.HASURA_ENDPOINT }} --admin-secret ${{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}
