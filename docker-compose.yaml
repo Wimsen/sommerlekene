@@ -1,4 +1,4 @@
-version: "3.6"
+version: '3.6'
 services:
   sommerlekene-postgres:
     image: postgres:15
@@ -10,18 +10,18 @@ services:
   sommerlekene-hasura:
     image: hasura/graphql-engine:v2.15.2-ce
     ports:
-      - "8090:8080"
+      - '8090:8080'
     depends_on:
-      - "sommerlekene-postgres"
+      - 'sommerlekene-postgres'
     restart: always
     env_file:
       - ./.env.development
     environment:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@sommerlekene-postgres:5432/postgres
       ## enable the console served by server
-      HASURA_GRAPHQL_ENABLE_CONSOLE: "false" # set to "false" to disable console
+      HASURA_GRAPHQL_ENABLE_CONSOLE: 'false' # set to "false" to disable console
       ## enable debugging mode. It is recommended to disable this in production
-      HASURA_GRAPHQL_DEV_MODE: "true"
+      HASURA_GRAPHQL_DEV_MODE: 'true'
       HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log, query-log
       HASURA_GRAPHQL_UNAUTHORIZED_ROLE: anonymous
 volumes:
