@@ -15,7 +15,7 @@ services:
       - "sommerlekene-postgres"
     restart: always
     env_file:
-      - ./.env.development.local
+      - ./.env.development
     environment:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@sommerlekene-postgres:5432/postgres
       ## enable the console served by server

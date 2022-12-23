@@ -16,11 +16,11 @@
     "format:check": "prettier -c .",
     "postbuild": "next-sitemap --config next-sitemap.config.js",
     "prepare": "husky install",
-    "console": "npx hasura console --envfile \"../.env.development.local\" --project hasura",
+    "console": "npx hasura console --envfile \"../.env.development\" --project hasura",
     "backend": "docker-compose up --detach && wait-on http-get://localhost:8090/healthz",
     "backend:clean": "docker-compose down --volumes",
     "backend:stop": "docker-compose down",
-    "backend:migrations": "cd hasura && hasura metadata apply --envfile \"../.env.development.local\" && hasura migrate apply --database-name default --envfile \"../.env.development.local\" && hasura metadata reload --envfile \"../.env.development.local\"",
+    "backend:migrations": "cd hasura && hasura metadata apply --envfile \"../.env.development\" && hasura migrate apply --database-name default --envfile \"../.env.development\" && hasura metadata reload --envfile \"../.env.development\"",
     "backend:reset": "npm run backend:clean && npm run backend && npm run backend:migrations",
     "production:upload": "./scripts/upload-docker-image.sh",
     "production:deploy": "./scripts/deploy-docker-image.sh"
