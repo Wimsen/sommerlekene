@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { ImSpinner2 } from 'react-icons/im';
 
 import clsxm from '@/lib/clsxm';
 
-enum ButtonVariant {
+import Loader from '@/components/Loader';
+
+export enum ButtonVariant {
   'primary',
   'outline',
   'ghost',
@@ -85,20 +86,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         )}
         {...rest}
       >
-        {isLoading && (
-          <div
-            className={clsxm(
-              'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2',
-              {
-                'text-white': ['primary', 'dark'].includes(variant),
-                'text-black': ['light'].includes(variant),
-                'text-primary-500': ['outline', 'ghost'].includes(variant),
-              }
-            )}
-          >
-            <ImSpinner2 className='animate-spin' />
-          </div>
-        )}
+        {isLoading && <Loader variant={variant} />}
         {children}
       </button>
     );

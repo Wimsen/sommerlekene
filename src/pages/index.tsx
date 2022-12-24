@@ -1,8 +1,15 @@
+import { signOut } from 'next-auth/react';
+
 import Layout from '@/components/layout/Layout';
 import Seo from '@/components/Seo';
-const IndexPage = () => (
+import WithAuthentication, {
+  AuthenticatedProps,
+} from '@/components/WithAuthentication';
+
+const IndexPage: React.FC<AuthenticatedProps<unknown>> = ({ session }) => (
   <Layout>
     <main>
+      <pre className='text-xs'>{JSON.stringify(session, null, 2)}</pre>
       <section className='bg-white'>
         <div className='layout flex min-h-screen flex-col items-center justify-center text-center'>
           <h1 className='mt-4'>Sommerlekene</h1>
@@ -13,7 +20,8 @@ const IndexPage = () => (
       </section>
     </main>
     <Seo />
+    <button onClick={() => signOut()}>Logg ut </button>
   </Layout>
 );
 
-export default IndexPage;
+export default WithAuthentication(IndexPage);
