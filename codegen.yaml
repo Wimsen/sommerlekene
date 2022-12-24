@@ -1,0 +1,23 @@
+schema:
+  http://localhost:8090/v1/graphql:
+    headers:
+      X-Hasura-Admin-Secret: myadminsecretkey
+documents:
+  - queries.tsx
+generates:
+  ./utils/gql/:
+    preset: client
+    config:
+      namingConvention:
+        typeNames: change-case-all#pascalCase
+        transformUnderscore: true
+      scalars:
+        date: string
+        numeric: number
+        timestamptz: string
+        uuid: string
+        jsonb: unknown
+        _text: string[]
+        citext: string
+        interval: string
+        smallint: number
