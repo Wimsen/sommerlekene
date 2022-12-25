@@ -12,14 +12,18 @@ if (!GOOGLE_CLIENT_SECRET) {
   throw Error('Missing required environment variable GOOGLE_CLIENT_SECRET');
 }
 
-// For more information on each option (and a full list of options) go to
-// https://next-auth.js.org/configuration/options
+const ALLOWED_EMAILS = ['jorgenwilhelmsen1@gmail.com'];
+
 export default NextAuth({
-  // https://next-auth.js.org/providers/overview
   providers: [
     GoogleProvider({
       clientId: GOOGLE_CLIENT_ID,
       clientSecret: GOOGLE_CLIENT_SECRET,
     }),
   ],
+  callbacks: {
+    async signIn({ user }) {
+      return ALLOWED_EMAILS.includes(user.email || '');
+    },
+  },
 });
